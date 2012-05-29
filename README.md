@@ -39,8 +39,33 @@ within the 100 most-recent matching tweets (if any).
 
 ## Caveats
 
-* The regular expression for extractions will not catch uncommon (but
-  valid) non-HTTP schemes.
+1. Don't expect truly pathological input to yield valid URIs.
+
+2. Technically valid URIs may still point to the wrong place, or to
+   non-existent resources. Filtering broken links is a job for a
+   link-checker, not a link-extractor.
+
+3. May not catch uncommon (but valid) URI schemes. If you find one,
+   please report it.
+
+4. Works best when the URL contains an explicit URI scheme.
+
+5. Will not find malformed URLs that consist solely of a top-level
+   domain without a URI prefix, e.g. "example.com/foo" will match but
+   just "example.com/" will not.
+
+6. Will not handle run-on sentences without trailing whitespace. For
+   example:
+
+        "Go to http://example.com/foo.It's really cool!"
+        => ["http://example.com/foo.It's"]
+  Even explicitly matching against all [top-level
+  domains](http://en.wikipedia.org/wiki/Top-level_domain) won't solve
+  the problem. If you find a solution, please submit a pull request.
+
+7. Can't handle literal smart-quotes embedded in the URL, since the
+   closing quote is a used as one of the stop characters for quoted
+   URIs.
 
 ## Supported Ruby Versions
 
