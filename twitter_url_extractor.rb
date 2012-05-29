@@ -56,7 +56,7 @@ end
 
 # Return a sorted list of unique URLs found in the list of tweets.
 def uniq_urls(tweets)
-  tweets.map(&:text).grep( %r{http://}i ).to_s.scan( URL_PATTERN ).uniq
+  tweets.map(&:text).to_s.scan(URL_PATTERN).flatten.compact.uniq
 end
 
 def search(hashtag)
