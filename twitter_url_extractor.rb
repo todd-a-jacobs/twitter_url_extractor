@@ -41,7 +41,23 @@ require 'bundler/setup'
 require 'twitter'
 
 RECORD_LIMIT = 100
-URL_PATTERN  = %r{http://[\w/.%-]+}i
+URL_PATTERN  = %r{
+  \b
+  (
+    (?: [a-z][\w-]+:
+     (?: /{1,3} | [a-z0-9%] ) |
+      www\d{0,3}[.] |
+      [a-z0-9.\-]+[.][a-z]{2,4}/
+    )
+    (?:
+     [^\s()<>]+ | \(([^\s()<>]+|(\([^\s()<>]+\)))*\)
+    )+
+    (?:
+      \(([^\s()<>]+|(\([^\s()<>]+\)))*\) |
+      [^\s`!()\[\]{};:'".,<>?«»“”‘’]
+    )
+  )
+}ix
 
 def usage
   warn "Usage: ruby #{File.basename $0} <hashtag>"
