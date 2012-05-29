@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: UTF-8
 
 # Name:
 #    twitter_url_extractor.rb 
