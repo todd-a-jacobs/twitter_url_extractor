@@ -40,7 +40,7 @@ require 'bundler/setup'
 require 'twitter'
 
 RECORD_LIMIT = 100
-URL_PATTERN  = Regexp.new %r{http://[\w/.%-]+}i
+URL_PATTERN  = %r{http://[\w/.%-]+}i
 
 def usage
   warn "Usage: ruby #{File.basename $0} <hashtag>"
